@@ -1,34 +1,26 @@
-name: Build Minecraft Mod
-on: [push, pull_request]
+name: Final Build Attempt
+on: [push]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
       - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
           java-version: '21'
           distribution: 'temurin'
 
-      - name: Make Gradlew Executable
-        run: chmod +x gradlew
-        continue-on-error: true
-
-      - name: Build with Gradle
+      - name: Force Build
         run: |
-          if [ -f gradlew ]; then
-            ./gradlew build --no-daemon
-          else
-            gradle build --no-daemon
-          fi
+          sudo apt-get update
+          sudo apt-get install -y gradle
+          gradle build --no-daemon || (echo "Build failed, checking logs..." && exit 1)
 
-      - name: Upload Mod Artifact
+      - name: Upload Result
         uses: actions/upload-artifact@v4
         with:
-          name: RaiderMod-Jar
+          name: Raider-Mod-Finished
           path: build/libs/*.jar
           
