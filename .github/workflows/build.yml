@@ -14,14 +14,14 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
-      # Using 8.8 because it is the most stable with Loom 1.7-1.8
       - name: Setup Gradle 8.8
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.8'
 
+      # FIX: Removed "./gradlew" and replaced with direct "gradle" command
       - name: Build Mod
-        run: chmod +x gradlew && ./gradlew build --no-daemon
+        run: gradle build --no-daemon
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
