@@ -3,12 +3,16 @@
   "id": "raider_rank_hub",
   "version": "1.0.0",
   "name": "Raider Rank Hub",
-  "authors": ["ZenitOg"],
-  "contact": {Pratik}
-    "homepage": "https://voracious-raider-rank-hub.base44.app/"
+  "description": "Asynchronously fetches and displays player ranks",
+  "authors": [
+    "Pratik"
+  ],
+  "contact": {
+    "homepage": "https://www.instagram.com/pratikyaps/",
+    "sources": "https://github.com/Zenit-Yapper"
   },
   "license": "MIT",
-  "icon": "icon.png",
+  "icon": "assets/raider_rank_hub/icon.png",
   "environment": "client",
   "entrypoints": {
     "main": [
