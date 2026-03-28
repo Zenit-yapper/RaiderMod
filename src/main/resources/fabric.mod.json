@@ -3,18 +3,17 @@
   "id": "raider_rank_hub",
   "version": "1.0.0",
   "name": "Raider Rank Hub",
-  "description": "Asynchronously fetches and displays player ranks from an external API.",
-  "authors": [
-    "Voracious"
-  ],
-  "contact": {
-    "homepage": "https://voracious-raider-rank-hub.base44.app/",
-    "sources": "https://github.com/Zenit-Yapper"
+  "authors": ["ZenitOg"],
+  "contact": {@pratikyaps}
+    "homepage": "https://voracious-raider-rank-hub.base44.app/"
   },
   "license": "MIT",
-  "icon": "assets/raider_rank_hub/icon.png",
+  "icon": "icon.png",
   "environment": "client",
   "entrypoints": {
+    "main": [
+      "com.voracious.hub.RaiderHubClient"
+    ],
     "client": [
       "com.voracious.hub.RaiderHubClient"
     ]
