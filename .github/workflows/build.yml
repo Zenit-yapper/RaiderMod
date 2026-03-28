@@ -14,10 +14,10 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
-      - name: Setup Gradle 8.11
+      - name: Setup Gradle 8.7
         uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: '8.11' # This version is required for Java 21
+          gradle-version: '8.7' # This is the "Sweet Spot" version
 
       - name: Build Mod
         run: gradle build --no-daemon
