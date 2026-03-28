@@ -14,14 +14,16 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
-      - name: Setup Gradle 8.11
+      - name: Setup Gradle 8.10
         uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: '8.11' # Upgrading to match Loom 1.9 requirements
+          gradle-version: '8.10'
 
+      # This step runs the actual compilation
       - name: Build Mod
         run: gradle build --no-daemon
 
+      # This makes the .jar file appear at the bottom of the Actions page
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
