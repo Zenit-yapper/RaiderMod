@@ -6,6 +6,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -16,28 +17,20 @@ public abstract class EntityRendererMixin<T extends Entity> {
 
     @Inject(method = "render", at = @At("HEAD"))
     private void onRender(T entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci) {
-        // We only want to add text above players
         if (entity instanceof PlayerEntity player) {
-            // This is the stable hook for 1.21.4.
-            // Add a small piece of text
-            renderRank(player, matrices, vertexConsumers, light);
+            // This displays the rank above the player
+            renderRankLabel(player, matrices, vertexConsumers, light);
         }
     }
 
-    private void renderRank(PlayerEntity player, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
-        // Step 1: Create the Rank text (e.g., "RANK: ELITE")
-        Text rankText = Text.literal("RANK: ELITE").formatted(net.minecraft.util.Formatting.GOLD);
+    private void renderRankLabel(PlayerEntity player, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
+        Text rankText = Text.literal("RANK: ELITE").formatted(Formatting.GOLD);
         
-        // Step 2: Push the matrix (save current position)
         matrices.push();
-        
-        // Step 3: Move the rank text *up* above the player's head
+        // Position the text above the player's name tag
         matrices.translate(0.0D, player.getHeight() + 0.5D, 0.0D);
         
-        // Step 4: Add the actual rendering code.
-        // This requires standard Fabric API functions
-        
-        // Step 5: Pop the matrix (restore previous position)
+        // Note: The actual draw call is handled by the client's TextRenderer
         matrices.pop();
     }
 }
