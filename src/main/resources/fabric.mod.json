@@ -8,8 +8,8 @@
     "Voracious"
   ],
   "contact": {
-    "homepage": "https://blink.new",
-    "sources": "https://blink.new"
+    "homepage": "https://voracious-raider-rank-hub.base44.app/",
+    "sources": "https://github.com/Zenit-Yapper"
   },
   "license": "MIT",
   "icon": "assets/raider_rank_hub/icon.png",
@@ -23,7 +23,7 @@
     "raider_rank_hub.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.15.0",
+    "fabricloader": ">=0.16.10",
     "minecraft": ">=1.21.1",
     "java": ">=21"
   }
