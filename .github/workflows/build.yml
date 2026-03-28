@@ -1,26 +1,30 @@
-name: Final Build Attempt
-on: [push]
+name: Build Minecraft Mod
+on: [push, pull_request]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
       - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
           java-version: '21'
           distribution: 'temurin'
 
-      - name: Force Build
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y gradle
-          gradle build --no-daemon || (echo "Build failed, checking logs..." && exit 1)
+      - name: Setup Gradle 8.10
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: 8.10
 
-      - name: Upload Result
+      - name: Build Mod
+        run: gradle build --no-daemon
+
+      - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Raider-Mod-Finished
+          name: RaiderMod-Build
           path: build/libs/*.jar
           
