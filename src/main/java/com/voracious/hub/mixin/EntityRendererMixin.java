@@ -18,19 +18,15 @@ public abstract class EntityRendererMixin<T extends Entity> {
     @Inject(method = "render", at = @At("HEAD"))
     private void onRender(T entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci) {
         if (entity instanceof PlayerEntity player) {
-            // This displays the rank above the player
-            renderRankLabel(player, matrices, vertexConsumers, light);
+            renderRank(player, matrices, vertexConsumers, light);
         }
     }
 
-    private void renderRankLabel(PlayerEntity player, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
+    private void renderRank(PlayerEntity player, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
         Text rankText = Text.literal("RANK: ELITE").formatted(Formatting.GOLD);
-        
         matrices.push();
-        // Position the text above the player's name tag
+        // Shift position up so it doesn't overlap the name.
         matrices.translate(0.0D, player.getHeight() + 0.5D, 0.0D);
-        
-        // Note: The actual draw call is handled by the client's TextRenderer
         matrices.pop();
     }
 }
